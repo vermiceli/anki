@@ -821,7 +821,7 @@ by clicking on one on the left."""))
         root = self.CallbackItem(root, _("My Searches"), None)
         root.setExpanded(True)
         root.setIcon(0, QIcon(":/icons/emblem-favorite-dark.png"))
-        for name, filt in saved.items():
+        for name, filt in sorted(saved.items()):
             item = self.CallbackItem(root, name, lambda s=filt: self.setFilter(s))
             item.setIcon(0, QIcon(":/icons/emblem-favorite-dark.png"))
     
@@ -1833,7 +1833,7 @@ class FavouritesLineEdit(QLineEdit):
             self.mw.col.setMod()
             
         self.updateButton()
-        self.browser.setupTree()
+        self.browser.buildTree()
     
     def deleteClicked(self):
         msg = _('Remove "%s" from your saved searches?') % self.name
@@ -1844,4 +1844,4 @@ class FavouritesLineEdit(QLineEdit):
             self.mw.col.conf['savedFilters'].pop(self.name, None)
             self.mw.col.setMod()
             self.updateButton()
-            self.browser.setupTree()
+            self.browser.buildTree()
